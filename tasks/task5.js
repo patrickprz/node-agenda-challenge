@@ -6,7 +6,7 @@ module.exports = {
         setTimeout(() => resolve("done"), 35000);
       });
 
-      promise.then(()=> console.log("Task 5 End -> ", Date(Date.now()));
+      promise.then(()=> console.log("Task 5 End -> ", Date(Date.now())));
 
     },
   };

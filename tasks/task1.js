@@ -1,12 +1,7 @@
 module.exports = {
-    run: function () {
-      console.log("Task 1 Start -> ", Date(Date.now()));
+  run: async function () {
+    var sleep = require('sleep');
+    sleep.sleep(50);
+  },
+};
 
-      let promise = new Promise(function(resolve, reject) {
-        setTimeout(() => resolve("done"), 50000);
-      });
-
-      promise.then(()=> console.log("Task 1 End -> ", Date(Date.now())));
-
-    },
-  };

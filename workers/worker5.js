@@ -1,10 +1,8 @@
-module.exports = function (input, callback) {
+module.exports = function (dbString, input, callback) {
     var Agenda = require('agenda');
     var task5 = require('../tasks/task5');
 
-    const mongoConnectionString = 'mongodb://localhost:27017/DbTest';
-
-    const agenda = new Agenda({db: {address: mongoConnectionString}});
+    const agenda = new Agenda({db: {address: dbString}});
 
     agenda.define('task5', async () => {
       await task5.run();
@@ -22,9 +20,8 @@ module.exports = function (input, callback) {
           job.remove(function(err) {
               console.log(err); 
           });
-          callback(null, input + ' PID(' + process.pid + ')')
+          callback(null, input + ' PID(' + process.pid + ')');
       });
-  
       await agenda.schedule('in 45 seconds', 'task5');
   })();
 }

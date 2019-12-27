@@ -1,4 +1,12 @@
 
+var jobTools = require('./jobTools');
+
+const clear = function(){
+  jobTools.clearUnfinishedJobs(function(result) {
+    console.log(result);
+  });
+}
+
 const run = function(){
   var workerFarm = require('worker-farm');
   var worker1    = workerFarm(require.resolve('./workers/worker1'));
@@ -35,3 +43,4 @@ const run = function(){
 }
 
 exports.run = run;
+exports.clear = clear;

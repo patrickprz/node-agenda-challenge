@@ -10,6 +10,7 @@ const agenda = new Agenda({db: {address: dbString}})
 
 agenda.define('run-jobs', (job, done) => {
     console.log('Middleware run: ', phaseCounter);
+    middleware.clear();
     middleware.run();
     done();
   });

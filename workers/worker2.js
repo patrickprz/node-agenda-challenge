@@ -17,9 +17,9 @@ module.exports = function (dbString, input, callback) {
   
       agenda.on('complete', function(job) { 
           console.log('Job %s finished ' + Date(Date.now), job.attrs.name);
-          job.remove(function(err) {
-              console.log(err); 
-          });
+          // job.remove(function(err) {
+          //     console.log(err); 
+          // });
           callback(null, input + ' PID(' + process.pid + ')');
       });
       await agenda.schedule('in 10 seconds', 'task2');

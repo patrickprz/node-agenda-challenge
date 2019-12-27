@@ -8,7 +8,6 @@ var Agenda = require('agenda');
 
 const agenda = new Agenda({db: {address: dbString}})
 
-
 agenda.define('run-jobs', (job, done) => {
     console.log('Middleware run: ', phaseCounter);
     middleware.run();
@@ -19,7 +18,12 @@ agenda.define('run-jobs', (job, done) => {
     const runJobs = agenda.create('run-jobs');
  
     await agenda.start();
-    await runJobs.repeatEvery('3 minutes').save();
+    
+    //limpa o gerenciador dos jobs
+    const numRemoved = await agenda.cancel({name: 'run-jobs'});
+    console.log("clear master job: ", numRemoved);
+
+    await runJobs.repeatEvery('2 minutes').save();
 
     agenda.on('start', job => {
         console.log('Job %s starting ' + Date(Date.now), job.attrs.name);
